@@ -1,4 +1,4 @@
-(ns insane-noises.core)
+(ns showerphone.core)
 
 (defn foo
   "I don't do a whole lot."

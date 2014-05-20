@@ -1,6 +1,6 @@
-(ns insane-noises.core-test
+(ns showerphone.core-test
   (:require [clojure.test :refer :all]
-            [insane-noises.core :refer :all]))
+            [showerphone.core :refer :all]))
 
 (deftest a-test
   (testing "FIXME, I fail."
