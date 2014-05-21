@@ -7,11 +7,12 @@
 
 (defonce one-twenty-bpm (metronome 120))
 
-(defn chord-progression-beat [m beat-num]
-  (at (m (+ 0 beat-num)) (play-chord (chord :C4 :major)))
-  (at (m (+ 4 beat-num)) (play-chord (chord :G3 :major)))
-  (at (m (+ 6 beat-num)) (play-chord (chord :F3 :sus4)))
-  (apply-at (m (+ 8 beat-num)) chord-progression-beat m (+ 8 beat-num) [])
+(defn chord-progression-beat [nome]
+  (let [beat (nome)]
+    (at (nome (+ 0 beat)) (play-chord (chord :C4 :major)))
+    (at (nome (+ 4 beat)) (play-chord (chord :G3 :major)))
+    (at (nome (+ 6 beat)) (play-chord (chord :F3 :sus4)))
+    (apply-by (nome (+ 8 beat)) chord-progression-beat nome (+ 8 beat) []))
 )
 
 (def kick
@@ -23,5 +24,5 @@
     (apply-by (nome (inc  beat)) looper nome sound [])))
 
 (looper one-twenty-bpm kick)
-(chord-progression-beat one-twenty-bpm (one-twenty-bpm))
+(chord-progression-beat one-twenty-bpm)
 (stop)
