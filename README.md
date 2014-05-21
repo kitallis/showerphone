@@ -1,14 +1,5 @@
-# insane-noises
+# showerphone
 
-A Clojure library designed to ... well, that part is up to you.
+attempting to sit in the bathroom, hugging your knees and looking emptily at the elliptical, aerated water formations on the floor.
 
-## Usage
-
-FIXME
-
-## License
-
-Copyright © 2013 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+imagining that every stream you touch is part of a symphony.
