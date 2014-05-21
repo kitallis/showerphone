@@ -7,22 +7,48 @@
 
 (defonce one-twenty-bpm (metronome 120))
 
-(defn chord-progression-beat [nome]
+(defn chord-progression-beat [nome chord-progression]
   (let [beat (nome)]
-    (at (nome (+ 0 beat)) (play-chord (chord :C4 :major)))
-    (at (nome (+ 4 beat)) (play-chord (chord :G3 :major)))
-    (at (nome (+ 6 beat)) (play-chord (chord :F3 :sus4)))
-    (apply-by (nome (+ 8 beat)) chord-progression-beat nome (+ 8 beat) []))
-)
+    (doseq [[base scale interval] chord-progression]
+      (at (nome (+ interval beat)) (play-chord (chord base scale))))
+    (apply-by (nome (+ 8 beat)) chord-progression-beat nome chord-progression [])))
 
 (def kick
   (sample (freesound-path 777)))
 
-(defn looper [nome sound]
-  (let [beat (nome)]
-    (at (nome beat) (sound))
-    (apply-by (nome (inc  beat)) looper nome sound [])))
+(def boom
+  (sample (freesound-path 33637)))
 
-(looper one-twenty-bpm kick)
-(chord-progression-beat one-twenty-bpm)
+(def close-hat
+  (sample (freesound-path 802)))
+
+(def open-hat
+  (sample (freesound-path 26657)))
+
+(defn looper [nome intervals sound]
+  (let [beat (nome)]
+    (doseq [interval intervals]
+      (at (nome (+ interval beat)) (sound)))
+    (apply-by (nome (+ 8 beat)) looper nome intervals sound [])))
+
+(defn kit []
+  (looper one-twenty-bpm
+          [1 2 3 4 5 6 7 8]
+          kick)
+  (looper one-twenty-bpm
+          [7.5]
+          close-hat)
+  (looper one-twenty-bpm
+          [8]
+          open-hat))
+
+(boom)
+
+(chord-progression-beat one-twenty-bpm
+                        '([:C4 :major 0]
+                          [:G3 :major 4]
+                          [:F3 :sus4  6]))
+
+(kit)
+
 (stop)
