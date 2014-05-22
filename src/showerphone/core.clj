@@ -13,17 +13,17 @@
       (at (nome (+ interval beat)) (play-chord (chord base scale))))
     (apply-by (nome (+ 8 beat)) chord-progression-beat nome chord-progression [])))
 
-(def kick
-  (sample (freesound-path 777)))
+(defsample kick
+  (freesound-path 777))
 
-(def boom
-  (sample (freesound-path 33637)))
+(defsample boom
+  (freesound-path 33637))
 
-(def close-hat
-  (sample (freesound-path 802)))
+(defsample close-hat
+  (freesound-path 802))
 
-(def open-hat
-  (sample (freesound-path 26657)))
+(defsample open-hat
+  (freesound-path 26657))
 
 (defn looper [nome intervals sound]
   (let [beat (nome)]
@@ -33,7 +33,7 @@
 
 (defn kit []
   (looper one-twenty-bpm
-          [1 2 3 4 5 6 7 8]
+          [0 1 2 3 4 5 6 7]
           kick)
   (looper one-twenty-bpm
           [7.5]
@@ -52,3 +52,6 @@
 (kit)
 
 (stop)
+
+;(recording-start "/Users/jithu/code/showerphone/sample.wav")
+;(recording-stop)
